@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../models/call_model.dart';
 
@@ -21,6 +22,24 @@ class _CallScreenState extends State<CallScreen> {
             InkWell(
               onTap: () {
                 //initiate the call
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ZegoUIKitPrebuiltCall(
+                      appID:
+                          1629007889, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+                      appSign:
+                          "a9dba0963113183508bf0a4f1190aabfef41be19858f2097b44cc4b3e671d0de", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+                      userID: call.id,
+                      userName: call.name,
+                      callID: call.id,
+                      // You can also use groupVideo/groupVoice/oneOnOneVoice to make more types of calls.
+                      config: ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall()
+                        ..onOnlySelfInRoom =
+                            (context) => Navigator.of(context).pop(),
+                    ),
+                  ),
+                );
               },
               child: ListTile(
                   leading: CircleAvatar(
